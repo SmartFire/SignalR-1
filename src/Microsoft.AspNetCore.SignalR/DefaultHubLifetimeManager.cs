@@ -69,7 +69,7 @@ namespace Microsoft.AspNetCore.SignalR
 
                 var invocationAdapter = _registry.GetInvocationAdapter(connection.Metadata.Get<string>("formatType"));
 
-                tasks.Add(invocationAdapter.WriteInvocationDescriptorAsync(message, connection.Channel.GetStream()));
+                tasks.Add(invocationAdapter.WriteInvocationDescriptorAsync(message, connection.Transport.GetStream()));
             }
 
             return Task.WhenAll(tasks);
@@ -87,7 +87,7 @@ namespace Microsoft.AspNetCore.SignalR
                 Arguments = args
             };
 
-            return invocationAdapter.WriteInvocationDescriptorAsync(message, connection.Channel.GetStream());
+            return invocationAdapter.WriteInvocationDescriptorAsync(message, connection.Transport.GetStream());
         }
 
         public override Task InvokeGroupAsync(string groupName, string methodName, object[] args)

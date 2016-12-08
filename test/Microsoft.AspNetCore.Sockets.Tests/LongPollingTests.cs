@@ -23,7 +23,7 @@ namespace Microsoft.AspNetCore.Sockets.Tests
                 var connection = new Connection();
                 connection.ConnectionId = Guid.NewGuid().ToString();
                 var channel = new HttpConnection(factory);
-                connection.Channel = channel;
+                connection.Transport = channel;
                 var context = new DefaultHttpContext();
                 var poll = new LongPolling(connection);
 
@@ -43,7 +43,7 @@ namespace Microsoft.AspNetCore.Sockets.Tests
                 var connection = new Connection();
                 connection.ConnectionId = Guid.NewGuid().ToString();
                 var channel = new HttpConnection(factory);
-                connection.Channel = channel;
+                connection.Transport = channel;
                 var context = new DefaultHttpContext();
                 var ms = new MemoryStream();
                 context.Response.Body = ms;

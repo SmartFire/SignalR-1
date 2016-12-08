@@ -16,7 +16,7 @@ namespace Microsoft.AspNetCore.Sockets
         public LongPolling(Connection connection)
         {
             _connection = connection;
-            _channel = (HttpConnection)connection.Channel;
+            _channel = (HttpConnection)connection.Transport;
         }
 
         public async Task ProcessRequestAsync(HttpContext context)

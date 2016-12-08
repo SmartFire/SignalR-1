@@ -97,7 +97,7 @@ namespace Microsoft.AspNetCore.SignalR
 
         private async Task DispatchMessagesAsync(Connection connection)
         {
-            var stream = connection.Channel.GetStream();
+            var stream = connection.Transport.GetStream();
             var invocationAdapter = _registry.GetInvocationAdapter(connection.Metadata.Get<string>("formatType"));
 
             while (true)

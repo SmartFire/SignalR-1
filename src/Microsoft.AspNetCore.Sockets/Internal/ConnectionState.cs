@@ -3,15 +3,21 @@
 
 using System;
 
-namespace Microsoft.AspNetCore.Sockets
+namespace Microsoft.AspNetCore.Sockets.Internal
 {
-    public class ConnectionState
+    public abstract class ConnectionState
     {
         public Connection Connection { get; set; }
 
         // These are used for long polling mostly
         public Action Close { get; set; }
-        public DateTimeOffset LastSeen { get; set; }
+        public DateTime LastSeenUtc { get; set; }
         public bool Active { get; set; } = true;
+
+        protected ConnectionState(Connection connection)
+        {
+            Connection = connection;
+            LastSeenUtc = DateTime.UtcNow;
+        }
     }
 }

@@ -23,7 +23,7 @@ namespace Microsoft.AspNetCore.Sockets.Tests
                 var connection = new Connection();
                 connection.ConnectionId = Guid.NewGuid().ToString();
                 var httpConnection = new HttpConnection(factory);
-                connection.Channel = httpConnection;
+                connection.Transport = httpConnection;
                 var ws = new WebSockets(connection, Format.Text, new LoggerFactory());
 
                 // Give the server socket to the transport and run it
@@ -40,7 +40,7 @@ namespace Microsoft.AspNetCore.Sockets.Tests
                 await pair.ClientSocket.CloseAsync(WebSocketCloseStatus.NormalClosure);
 
                 // Capture everything out of the input channel and then complete the writer (to do our end of the close)
-                var buffer = (await connection.Channel.Input.ReadToEndAsync()).ToArray();
+                var buffer = (await connection.Transport.Input.ReadToEndAsync()).ToArray();
                 httpConnection.Output.CompleteWriter();
 
                 // The transport should finish now
@@ -66,7 +66,7 @@ namespace Microsoft.AspNetCore.Sockets.Tests
                 var connection = new Connection();
                 connection.ConnectionId = Guid.NewGuid().ToString();
                 var httpConnection = new HttpConnection(factory);
-                connection.Channel = httpConnection;
+                connection.Transport = httpConnection;
                 var ws = new WebSockets(connection, format, new LoggerFactory());
 
                 // Give the server socket to the transport and run it
@@ -100,7 +100,7 @@ namespace Microsoft.AspNetCore.Sockets.Tests
                 var connection = new Connection();
                 connection.ConnectionId = Guid.NewGuid().ToString();
                 var httpConnection = new HttpConnection(factory);
-                connection.Channel = httpConnection;
+                connection.Transport = httpConnection;
                 var ws = new WebSockets(connection, Format.Binary, new LoggerFactory());
 
                 // Give the server socket to the transport and run it
@@ -137,7 +137,7 @@ namespace Microsoft.AspNetCore.Sockets.Tests
                 var connection = new Connection();
                 connection.ConnectionId = Guid.NewGuid().ToString();
                 var httpConnection = new HttpConnection(factory);
-                connection.Channel = httpConnection;
+                connection.Transport = httpConnection;
                 var ws = new WebSockets(connection, Format.Binary, new LoggerFactory());
 
                 // Give the server socket to the transport and run it
@@ -163,7 +163,7 @@ namespace Microsoft.AspNetCore.Sockets.Tests
                 var connection = new Connection();
                 connection.ConnectionId = Guid.NewGuid().ToString();
                 var httpConnection = new HttpConnection(factory);
-                connection.Channel = httpConnection;
+                connection.Transport = httpConnection;
                 var ws = new WebSockets(connection, Format.Binary, new LoggerFactory());
 
                 // Give the server socket to the transport and run it

@@ -19,7 +19,7 @@ namespace Microsoft.AspNetCore.Sockets.Tests
             Assert.NotNull(state.Connection.ConnectionId);
             Assert.True(state.Active);
             Assert.Null(state.Close);
-            Assert.Null(state.Connection.Channel);
+            Assert.Null(state.Connection.Transport);
         }
 
         [Fact]
@@ -47,12 +47,12 @@ namespace Microsoft.AspNetCore.Sockets.Tests
 
                 Assert.NotNull(state.Connection);
                 Assert.NotNull(state.Connection.ConnectionId);
-                Assert.NotNull(state.Connection.Channel);
+                Assert.NotNull(state.Connection.Transport);
 
                 ConnectionState newState;
                 Assert.True(connectionManager.TryGetConnection(state.Connection.ConnectionId, out newState));
                 Assert.Same(newState, state);
-                Assert.Same(connection, newState.Connection.Channel);
+                Assert.Same(connection, newState.Connection.Transport);
             }
         }
 
@@ -67,12 +67,12 @@ namespace Microsoft.AspNetCore.Sockets.Tests
 
                 Assert.NotNull(state.Connection);
                 Assert.NotNull(state.Connection.ConnectionId);
-                Assert.NotNull(state.Connection.Channel);
+                Assert.NotNull(state.Connection.Transport);
 
                 ConnectionState newState;
                 Assert.True(connectionManager.TryGetConnection(state.Connection.ConnectionId, out newState));
                 Assert.Same(newState, state);
-                Assert.Same(connection, newState.Connection.Channel);
+                Assert.Same(connection, newState.Connection.Transport);
 
                 connectionManager.RemoveConnection(state.Connection.ConnectionId);
                 Assert.False(connectionManager.TryGetConnection(state.Connection.ConnectionId, out newState));

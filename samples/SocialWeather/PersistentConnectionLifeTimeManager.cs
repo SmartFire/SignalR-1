@@ -31,7 +31,7 @@ namespace SocialWeather
             foreach (var connection in _connectionList)
             {
                 var formatter = _formatterResolver.GetFormatter<T>(connection.Metadata.Get<string>("formatType"));
-                await formatter.WriteAsync(data, connection.Channel.GetStream());
+                await formatter.WriteAsync(data, connection.Transport.GetStream());
             }
         }
 

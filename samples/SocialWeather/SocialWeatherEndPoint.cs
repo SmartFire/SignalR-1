@@ -28,7 +28,7 @@ namespace SocialWeather
 
         public async Task ProcessRequests(Connection connection)
         {
-            var stream = connection.Channel.GetStream();
+            var stream = connection.Transport.GetStream();
             var formatter = _formatterResolver.GetFormatter<WeatherReport>(
                 connection.Metadata.Get<string>("formatType"));
 

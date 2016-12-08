@@ -28,7 +28,7 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 await connectionWrapper.HttpConnection.Input.ReadingStarted;
 
                 // kill the connection
-                connectionWrapper.Connection.Channel.Dispose();
+                connectionWrapper.Connection.Transport.Dispose();
 
                 await endPointTask;
 
@@ -77,7 +77,7 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             private HttpConnection _httpConnection;
 
             public Connection Connection;
-            public HttpConnection HttpConnection => (HttpConnection)Connection.Channel;
+            public HttpConnection HttpConnection => (HttpConnection)Connection.Transport;
 
             public ConnectionWrapper(string format = "json")
             {
@@ -93,7 +93,7 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
             public void Dispose()
             {
-                Connection.Channel.Dispose();
+                Connection.Transport.Dispose();
                 _httpConnection.Dispose();
                 _factory.Dispose();
             }

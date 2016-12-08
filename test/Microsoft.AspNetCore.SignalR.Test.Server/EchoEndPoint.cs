@@ -9,7 +9,7 @@ namespace Microsoft.AspNetCore.SignalR.Test.Server
     {
         public async override Task OnConnectedAsync(Connection connection)
         {
-            await connection.Channel.Input.CopyToAsync(connection.Channel.Output);
+            await connection.Transport.Input.CopyToAsync(connection.Transport.Output);
         }
     }
 }

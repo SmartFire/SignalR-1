@@ -23,7 +23,7 @@ namespace Microsoft.AspNetCore.Sockets.Tests
                 var connection = new Connection();
                 connection.ConnectionId = Guid.NewGuid().ToString();
                 var httpConnection = new HttpConnection(factory);
-                connection.Channel = httpConnection;
+                connection.Transport = httpConnection;
                 var sse = new ServerSentEvents(connection);
                 var context = new DefaultHttpContext();
 
@@ -44,7 +44,7 @@ namespace Microsoft.AspNetCore.Sockets.Tests
                 var connection = new Connection();
                 connection.ConnectionId = Guid.NewGuid().ToString();
                 var httpConnection = new HttpConnection(factory);
-                connection.Channel = httpConnection;
+                connection.Transport = httpConnection;
                 var sse = new ServerSentEvents(connection);
                 var context = new DefaultHttpContext();
                 var ms = new MemoryStream();

@@ -51,7 +51,7 @@ namespace Microsoft.AspNetCore.SignalR.Redis
 
                 foreach (var connection in _connections)
                 {
-                    tasks.Add(connection.Channel.Output.WriteAsync((byte[])data));
+                    tasks.Add(connection.Transport.Output.WriteAsync((byte[])data));
                 }
 
                 previousBroadcastTask = Task.WhenAll(tasks);
@@ -133,7 +133,7 @@ namespace Microsoft.AspNetCore.SignalR.Redis
             {
                 await previousConnectionTask;
 
-                previousConnectionTask = connection.Channel.Output.WriteAsync((byte[])data);
+                previousConnectionTask = connection.Transport.Output.WriteAsync((byte[])data);
             });
 
 
@@ -149,7 +149,7 @@ namespace Microsoft.AspNetCore.SignalR.Redis
                 {
                     await previousUserTask;
 
-                    previousUserTask = connection.Channel.Output.WriteAsync((byte[])data);
+                    previousUserTask = connection.Transport.Output.WriteAsync((byte[])data);
                 });
             }
 
@@ -222,7 +222,7 @@ namespace Microsoft.AspNetCore.SignalR.Redis
                     var tasks = new List<Task>(group.Connections.Count);
                     foreach (var groupConnection in group.Connections)
                     {
-                        tasks.Add(groupConnection.Channel.Output.WriteAsync((byte[])data));
+                        tasks.Add(groupConnection.Transport.Output.WriteAsync((byte[])data));
                     }
 
                     previousTask = Task.WhenAll(tasks);

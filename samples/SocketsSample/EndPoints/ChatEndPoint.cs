@@ -21,7 +21,7 @@ namespace SocketsSample
 
             while (true)
             {
-                var result = await connection.Channel.Input.ReadAsync();
+                var result = await connection.Transport.Input.ReadAsync();
                 var input = result.Buffer;
                 try
                 {
@@ -35,7 +35,7 @@ namespace SocketsSample
                 }
                 finally
                 {
-                    connection.Channel.Input.Advance(input.End);
+                    connection.Transport.Input.Advance(input.End);
                 }
             }
 
@@ -55,7 +55,7 @@ namespace SocketsSample
 
             foreach (var c in Connections)
             {
-                tasks.Add(c.Channel.Output.WriteAsync(payload));
+                tasks.Add(c.Transport.Output.WriteAsync(payload));
             }
 
             return Task.WhenAll(tasks);

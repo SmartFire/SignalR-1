@@ -3,9 +3,10 @@
 
 namespace Microsoft.AspNetCore.Sockets
 {
-    public enum Format
+    public class MessagingConnection : Connection
     {
-        Text,
-        Binary
+        public override ConnectionMode Mode => ConnectionMode.Messaging;
+
+        public MessagingConnection(string id) : base(id) { }
     }
 }

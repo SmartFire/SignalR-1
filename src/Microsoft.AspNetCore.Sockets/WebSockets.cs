@@ -33,7 +33,7 @@ namespace Microsoft.AspNetCore.Sockets
                 throw new ArgumentNullException(nameof(loggerFactory));
             }
 
-            _channel = (HttpConnection)connection.Channel;
+            _channel = (HttpConnection)connection.Transport;
             _opcode = format == Format.Binary ? WebSocketOpcode.Binary : WebSocketOpcode.Text;
             _logger = loggerFactory.CreateLogger<WebSockets>();
         }
